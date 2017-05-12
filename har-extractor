@@ -1,0 +1,119 @@
+#!/usr/bin/env python3
+
+from argparse import ArgumentParser
+from urllib.parse import urlparse
+from base64 import b64decode
+import json
+import os
+
+try:
+    from hurry.filesize import size
+except ImportError:
+    def size(x):
+        if x < 0:
+            return '<invalid size>'
+        if x == 0:
+            return '0B'
+        i = 0
+        k = 1
+        while x >= k:
+            k *= 1024
+            i += 1
+        return '%.2f%s' % (float(x) / (k / 1024), 'BKMGT'[i - 1])
+
+def getname(path):
+    if not os.path.exists(path):
+        return path
+    path = os.path.splitext(path)
+    plist = [ path[0], '.', '1', path[1] ]
+    i = 1
+    while True:
+        path = ''.join(plist)
+        if not os.path.exists(path):
+            return path
+        i += 1
+        plist[2] = str(i)
+
+def extract(data, dir=None):
+    if dir is not None:
+        os.makedirs(dir, exist_ok=True)
+    for entry in data:
+        try:
+            request = entry['request']
+            response = entry['response']
+            content = response['content']
+            url = urlparse(request['url'])
+            fname = os.path.basename(url.path)
+            if fname == '':
+                fname = os.path.dirname(url.path)
+                if fname == '/':
+                    fname = 'index.html'
+            print('%s %s -> %s %s %s %s' % (
+                request['method'],
+                request['url'],
+                response['status'],
+                response['statusText'],
+                content['mimeType'],
+                size(content['size'])
+            ))
+            if dir is not None:
+                if content['size'] > 0:
+                    text = content['text']
+                    try:
+                        if content['encoding'] == 'base64':
+                            text = b64decode(text)
+                        else:
+                            print('\tUnknown content encoding:',
+                                  content['encoding'])
+                    except KeyError:
+                        pass
+                    fname = getname(os.path.join(dir, fname))
+                    print('\t---->', fname)
+                    try:
+                        if type(text) == bytes:
+                            mode = 'wb'
+                        else:
+                            mode = 'w'
+                        with open(fname, mode) as fp:
+                            fp.write(text)
+                    except OSError as err:
+                        print('\tOSerror', fname)
+                        #print(err)
+                        raise
+        except KeyError as err:
+            try:
+                print('KeyError', entry['request']['url'])
+            except:
+                print('KeyError', entry)
+            #print(err)
+            raise
+
+parser = ArgumentParser()
+
+parser.add_argument('FILE', nargs='+', help='HAR file')
+
+parser.add_argument('-l', '--list', action='store_true',
+                    help='list the contents of input files')
+
+parser.add_argument('-o', '--output-directory',
+                    metavar='DIRECTORY', default='.',
+                    help='set output directory')
+
+args = parser.parse_args()
+
+for fname in args.file:
+    try:
+        print('Loading', fname)
+        with open(fname, 'r') as fp:
+            data = json.load(fp)
+        data = data['log']['entries']
+        if args.list:
+            dir = None
+        else:
+            dir = os.path.join(args.dir, os.path.basename(fname) + '.d')
+        extract(data, dir)
+    except KeyError as err:
+        print('KeyError', fname, err)
+    except OSError as err:
+        print('OSError', fname, err)
+        raise
