@@ -1,15 +1,21 @@
 #!/usr/bin/env python3
 
+import os
 from unittest import TestLoader
 from setuptools import setup
 
 def tests():
     return TestLoader().discover('tests')
 
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+with open(os.path.join(BASE_DIR, 'README.rst')) as fp:
+    README = fp.read()
+
 setup(
     name='har-extractor',
-    version='0.1',
+    version='0.1.0',
     description='HTTP Archive extractor',
+    long_description=README,
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',
@@ -17,7 +23,6 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3 :: Only',
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: System :: Archiving',
         'Topic :: Utilities'
@@ -35,6 +40,7 @@ setup(
     },
     test_suite='setup.tests',
     install_requires=['ijson'],
+    python_requires='>=3',
     include_package_data=True,
     zip_safe=False
 )
