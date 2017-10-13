@@ -8,8 +8,11 @@ def tests():
     return TestLoader().discover('tests')
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-with open(os.path.join(BASE_DIR, 'README.rst')) as fp:
-    README = fp.read()
+try:
+    with open(os.path.join(BASE_DIR, 'README.rst')) as fp:
+        README = fp.read()
+except OSError:
+    README = ''
 
 setup(
     name='har-extractor',
