@@ -16,11 +16,19 @@ Extractor for [`HAR`](https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HAR/Over
 ## Installation
 
 ```
-python setup.py install
+pip install har-extractor
 ```
 
 ```
-pip install har-extractor
+git clone https://github.com/dead-beef/har-extractor
+cd har-extractor
+pip install -e .[dev]
+```
+
+## Testing
+
+```
+./test
 ```
 
 ## Usage
@@ -37,16 +45,6 @@ optional arguments:
   -l, --list            list the contents of input files
   -o DIRECTORY, --output-directory DIRECTORY
                         set output directory (default: ./<filename>.d)
-```
-
-## Testing
-
-```
-python setup.py test
-```
-
-```
-coverage run --include har_extractor.py setup.py test
 ```
 
 ## Licenses
