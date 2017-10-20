@@ -43,6 +43,9 @@ setup(
     },
     test_suite='setup.tests',
     install_requires=['ijson'],
+    extras_require={
+        'dev': ['coverage']
+    },
     python_requires='>=3',
     include_package_data=True,
     zip_safe=False
