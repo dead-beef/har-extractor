@@ -54,16 +54,16 @@ def write(content, fname):
         fp.write(content)
 
 def format_entry(entry):
-    request = entry['request']
-    response = entry['response']
-    content = response['content']
+    request = entry.get('request', {})
+    response = entry.get('response', {})
+    content = response.get('content', {})
     return '%s %s -> %s %s %s %s' % (
-        request['method'],
-        request['url'],
-        response['status'],
-        response['statusText'],
-        content['mimeType'],
-        format_size(content['size'])
+        request.get('method', '<no method>'),
+        request.get('url', '<no url>'),
+        response.get('status', '<no status>'),
+        response.get('statusText', '<no status text>'),
+        content.get('mimeType', '<no mime type>'),
+        format_size(content.get('size', -1))
     )
 
 def get_entry_content(entry):

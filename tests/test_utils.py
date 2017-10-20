@@ -81,6 +81,11 @@ class TestUtils(TestCase):
         self.assertEqual(format_entry(entry), formatted)
         format_size_mock.assert_called_with(321)
 
+    def test_format_entry_invalid(self):
+        formatted = '<no method> <no url> -> <no status>' \
+                    ' <no status text> <no mime type> <invalid size>'
+        self.assertEqual(format_entry({}), formatted)
+
     def test_get_entry_path(self):
         test = lambda url: get_entry_path({'request': {'url': url}})
         self.assertEqual(test('http://127.0.0.1'), 'index.html')

@@ -98,7 +98,10 @@ GET https://127.0.0.1/404 -> 404 Not Found text/plain 0B
 \t----> <no content>
 '''
 
-TEST_ARCHIVE_INVALID_VERBOSE = '''GET https://127.0.0.1/404 -> 404 Not Found text/plain 3B
+TEST_ARCHIVE_INVALID_VERBOSE = '''<no method> <no url> -> 200 OK text/plain 4B
+<no method> <no url> -> <no status> <no status text> <no mime type> <invalid size>
+\t----> <no content>
+GET https://127.0.0.1/404 -> 404 Not Found text/plain 3B
 \t----> dir/404
 '''
 
@@ -107,5 +110,7 @@ GET https://127.0.0.1/dir/ -> 200 OK text/plain 8B
 GET https://127.0.0.1/404 -> 404 Not Found text/plain 0B
 '''
 
-TEST_ARCHIVE_INVALID_LIST = '''GET https://127.0.0.1/404 -> 404 Not Found text/plain 3B
+TEST_ARCHIVE_INVALID_LIST = '''<no method> <no url> -> 200 OK text/plain 4B
+<no method> <no url> -> <no status> <no status text> <no mime type> <invalid size>
+GET https://127.0.0.1/404 -> 404 Not Found text/plain 3B
 '''
