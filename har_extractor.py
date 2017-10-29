@@ -19,7 +19,13 @@ except ImportError:
         except ImportError:
             ijson = None
 
+
+__appname__ = 'har-extractor'
+__version__ = '0.2.0'
+
+NAME_VERSION = '%s %s' % (__appname__, __version__)
 SIZE_UNITS = 'BKMGT'
+
 
 def format_size(size):
     if size < 0:
@@ -157,6 +163,9 @@ def main(args=None):
     parser = ArgumentParser(args)
 
     parser.add_argument('file', metavar='FILE', help='HAR file')
+
+    parser.add_argument('-V', '--version',
+                        action='version', version=NAME_VERSION)
 
     parser.add_argument('-v', '--verbose', action='store_true',
                         help='list extracted files')
