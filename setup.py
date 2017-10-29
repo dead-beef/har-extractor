@@ -16,7 +16,7 @@ except OSError:
 
 setup(
     name='har-extractor',
-    version='0.1.0',
+    version='0.2.0',
     description='HTTP Archive extractor',
     long_description=README,
     classifiers=[
