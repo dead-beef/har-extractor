@@ -44,7 +44,11 @@ setup(
     test_suite='setup.tests',
     install_requires=['ijson'],
     extras_require={
-        'dev': ['coverage']
+        'dev': [
+            'coverage',
+            'twine>=1.8.1',
+            'wheel'
+        ]
     },
     python_requires='>=3',
     include_package_data=True,
