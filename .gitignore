@@ -2,7 +2,6 @@
 /build
 /dist
 /*.egg-info
-/README.rst
 *.pyc
 __pycache__
 .coverage

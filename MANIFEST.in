@@ -1,5 +1,3 @@
-include README.md
-include LICENSE
 include tests/*.py
 include build.sh
 include test
