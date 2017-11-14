@@ -44,7 +44,7 @@ Usage
 
 ::
 
-    usage: har-extractor [-h] [--version] [-v] [-l] [-i] [-s] [-d] [-o DIRECTORY] FILE
+    usage: har-extractor [-h] [-V] [-v] [-l] [-i] [-s] [-d] [-o DIRECTORY] FILE
 
     positional arguments:
       FILE                  HAR file
