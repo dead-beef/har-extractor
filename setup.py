@@ -16,7 +16,7 @@ except IOError:
 
 setup(
     name='har-extractor',
-    version='0.2.0',
+    version='0.2.1',
     description='HTTP Archive extractor',
     long_description=README,
     classifiers=[
