@@ -1,6 +1,19 @@
 har-extractor
 =============
 
+.. image:: https://img.shields.io/pypi/v/har-extractor.svg
+   :target: https://pypi.python.org/pypi/har-extractor
+.. image:: https://img.shields.io/pypi/status/har-extractor.svg
+   :target: https://pypi.python.org/pypi/har-extractor
+.. image:: https://img.shields.io/pypi/format/har-extractor.svg
+   :target: https://pypi.python.org/pypi/har-extractor
+.. image:: https://img.shields.io/librariesio/github/dead-beef/har-extractor.svg
+   :target: https://libraries.io/pypi/har-extractor
+.. image:: https://img.shields.io/pypi/pyversions/har-extractor.svg
+   :target: https://python.org
+.. image:: https://img.shields.io/pypi/l/har-extractor.svg
+   :target: https://github.com/dead-beef/har-extractor/blob/master/LICENSE
+
 Overview
 --------
 
@@ -26,19 +39,6 @@ Installation
 
     pip install har-extractor
 
-.. code:: bash
-
-    git clone https://github.com/dead-beef/har-extractor
-    cd har-extractor
-    pip install -e .[dev]
-
-Testing
--------
-
-.. code:: bash
-
-    ./test
-
 Usage
 -----
 
@@ -59,6 +59,32 @@ Usage
       -d, --directories     create url directories
       -o DIRECTORY, --output DIRECTORY
                             set output directory (default: ./<filename>.d)
+
+Development
+-----------
+
+Installation
+~~~~~~~~~~~~
+
+.. code:: bash
+
+    git clone https://github.com/dead-beef/har-extractor
+    cd har-extractor
+    pip install -e .[dev]
+
+Building
+~~~~~~~~
+
+.. code:: bash
+
+    ./build.sh
+
+Testing
+~~~~~~~
+
+.. code:: bash
+
+    ./test
 
 Licenses
 --------
