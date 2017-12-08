@@ -30,7 +30,7 @@ class TestMain(TestCase):
         get_out_dir.assert_called_with(None, 'file.d')
         open_.assert_called_with('file', 'rb')
         get_entries.assert_called_with(handle, False)
-        extract.assert_called_with('entries', 'outdir', False, False, False)
+        extract.assert_called_with('entries', 'outdir', True, True, False)
 
     def test_list(self, extract, get_entries,
                   get_out_dir, open_, rmtree, stderr):
@@ -42,19 +42,34 @@ class TestMain(TestCase):
         self.assertEqual(get_out_dir.call_count, 0)
         open_.assert_called_with('file', 'rb')
         get_entries.assert_called_with(handle, False)
-        extract.assert_called_with('entries', None, False, False, False)
+        extract.assert_called_with('entries', None, True, True, False)
 
     def test_args(self, extract, get_entries,
                   get_out_dir, open_, rmtree, stderr):
         handle = open_()
-        self.assertEqual(main(['-v', '-i', '-o', 'dir', 'file']), 0)
+        self.assertEqual(
+            main(['-v', '-i', '-d', '-s', '-o', 'dir', 'file']),
+            0
+        )
         stderr.seek(0)
         self.assertEqual(stderr.read(), '')
         self.assertEqual(rmtree.call_count, 0)
         get_out_dir.assert_called_with('dir', 'file.d')
         open_.assert_called_with('file', 'rb')
         get_entries.assert_called_with(handle, True)
-        extract.assert_called_with('entries', 'outdir', False, True, False)
+        extract.assert_called_with('entries', 'outdir', True, True, True)
+
+        self.assertEqual(
+            main(['-nv', '-ni', '-nd', '-ns', '-o', 'dir', 'file']),
+            0
+        )
+        stderr.seek(0)
+        self.assertEqual(stderr.read(), '')
+        self.assertEqual(rmtree.call_count, 0)
+        get_out_dir.assert_called_with('dir', 'file.d')
+        open_.assert_called_with('file', 'rb')
+        get_entries.assert_called_with(handle, False)
+        extract.assert_called_with('entries', 'outdir', False, False, False)
 
     def test_getdir_error(self, extract, get_entries,
                           get_out_dir, open_, rmtree, stderr):
@@ -79,7 +94,7 @@ class TestMain(TestCase):
         get_out_dir.assert_called_with(None, 'file.d')
         open_.assert_called_with('file', 'rb')
         get_entries.assert_called_with(handle, False)
-        extract.assert_called_with('entries', 'outdir', False, False, False)
+        extract.assert_called_with('entries', 'outdir', True, True, False)
 
     def test_extract_error_strict(self, extract, get_entries,
                                   get_out_dir, open_, rmtree, stderr):
@@ -92,4 +107,4 @@ class TestMain(TestCase):
         get_out_dir.assert_called_with(None, 'file.d')
         open_.assert_called_with('file', 'rb')
         get_entries.assert_called_with(handle, False)
-        extract.assert_called_with('entries', 'outdir', False, False, True)
+        extract.assert_called_with('entries', 'outdir', True, True, True)

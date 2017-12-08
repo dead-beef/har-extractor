@@ -221,27 +221,59 @@ def main(args=None):
     parser.add_argument('-V', '--version',
                         action='version', version=NAME_VERSION)
 
-    parser.add_argument('-v', '--verbose', action='store_true',
-                        help='list extracted files')
-
     parser.add_argument('-l', '--list', action='store_true',
                         help='list the contents of input file')
-
-    parser.add_argument('-i', '--iterative',
-                        action='store_true',
-                        help='iteratively parse input file')
-
-    parser.add_argument('-s', '--strict',
-                        action='store_true',
-                        help='exit and delete extracted data after first error')
-
-    parser.add_argument('-d', '--directories',
-                        action='store_true',
-                        help='create url directories')
 
     parser.add_argument('-o', '--output',
                         metavar='DIRECTORY', default=None,
                         help='set output directory (default: ./<filename>.d)')
+
+    parser.add_argument('-v', '--verbose',
+                        dest='verbose',
+                        action='store_true',
+                        help='turn on verbose output (default)')
+
+    parser.add_argument('-nv', '--no-verbose',
+                        dest='verbose',
+                        action='store_false',
+                        help='turn off verbose output')
+
+    parser.add_argument('-i', '--iterative',
+                        dest='iterative',
+                        action='store_true',
+                        help='use iterative json parser')
+
+    parser.add_argument('-ni', '--no-iterative',
+                        dest='iterative',
+                        action='store_false',
+                        help='do not use iterative json parser (default)')
+
+    parser.add_argument('-s', '--strict',
+                        dest='strict',
+                        action='store_true',
+                        help='exit and delete extracted data after first error')
+
+    parser.add_argument('-ns', '--no-strict',
+                        dest='strict',
+                        action='store_false',
+                        help='ignore errors (default)')
+
+    parser.add_argument('-d', '--directories',
+                        dest='directories',
+                        action='store_true',
+                        help='create url directories (default)')
+
+    parser.add_argument('-nd', '--no-directories',
+                        dest='directories',
+                        action='store_false',
+                        help='do not create url directories')
+
+    parser.set_defaults(
+        iterative=False,
+        directories=True,
+        strict=False,
+        verbose=True
+    )
 
     if args is not None:
         args = parser.parse_args(args)

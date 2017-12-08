@@ -44,7 +44,9 @@ Usage
 
 ::
 
-    usage: har-extractor [-h] [-V] [-v] [-l] [-i] [-s] [-d] [-o DIRECTORY] FILE
+    usage: har_extractor.py [-h] [-V] [-l] [-o DIRECTORY] [-v] [-nv] [-i] [-ni]
+                            [-s] [-ns] [-d] [-nd]
+                            FILE
 
     positional arguments:
       FILE                  HAR file
@@ -52,13 +54,18 @@ Usage
     optional arguments:
       -h, --help            show this help message and exit
       -V, --version         show program's version number and exit
-      -v, --verbose         list extracted files
       -l, --list            list the contents of input file
-      -i, --iterative       iteratively parse input file
-      -s, --strict          exit and delete extracted data after first error
-      -d, --directories     create url directories
       -o DIRECTORY, --output DIRECTORY
                             set output directory (default: ./<filename>.d)
+      -v, --verbose         turn on verbose output (default)
+      -nv, --no-verbose     turn off verbose output
+      -i, --iterative       use iterative json parser
+      -ni, --no-iterative   do not use iterative json parser (default)
+      -s, --strict          exit and delete extracted data after first error
+      -ns, --no-strict      ignore errors (default)
+      -d, --directories     create url directories (default)
+      -nd, --no-directories
+                            do not create url directories
 
 Development
 -----------
