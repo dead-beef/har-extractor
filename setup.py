@@ -16,11 +16,11 @@ except IOError:
 
 setup(
     name='har-extractor',
-    version='0.2.1',
+    version='1.0.0',
     description='HTTP Archive extractor',
     long_description=README,
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
         'Intended Audience :: End Users/Desktop',
         'License :: OSI Approved :: MIT License',
