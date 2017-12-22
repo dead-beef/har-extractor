@@ -23,7 +23,7 @@ except ImportError:
 
 
 __appname__ = 'har-extractor'
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 
 NAME_VERSION = '%s %s' % (__appname__, __version__)
 SIZE_UNITS = 'BKMGT'
