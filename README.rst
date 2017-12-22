@@ -44,9 +44,9 @@ Usage
 
 ::
 
-    usage: har_extractor.py [-h] [-V] [-l] [-o DIRECTORY] [-v] [-nv] [-i] [-ni]
-                            [-s] [-ns] [-d] [-nd]
-                            FILE
+    usage: har-extractor [-h] [-V] [-l] [-o DIRECTORY] [-v] [-nv] [-i] [-ni]
+                         [-s] [-ns] [-d] [-nd]
+                         FILE
 
     positional arguments:
       FILE                  HAR file
