@@ -74,29 +74,22 @@ def format_entry(entry):
         format_size(content.get('size', -1))
     )
 
-def get_entry_content(entry):
+def get_entry_path(entry, subdirs=False):
     try:
-        content = entry['response']['content']
+        url = urlparse(entry['request']['url'])
     except KeyError:
-        return None
-    try:
-        text = content['text']
-        if not text:
-            return None
-    except KeyError:
-        return None
+        raise ValueError('Invalid entry: missing request URL: %s' % repr(entry))
 
-    try:
-        if content['encoding'] == 'base64':
-            text = b64decode(text)
-        else:
-            raise ValueError(
-                '\tUnknown content encoding: "%s"' % content['encoding']
-            )
-    except KeyError:
-        pass
+    fname = url.path.strip('/')
+    if '?' in fname:
+        fname = fname.split('?', 1)[0]
 
-    return text
+    if fname == '':
+        fname = 'index.html'
+
+    if subdirs:
+        return os.path.join(url.netloc, fname)
+    return os.path.basename(fname)
 
 def get_entry_path(entry, subdirs=False):
     try:
