@@ -75,7 +75,7 @@ Installation
 
 .. code:: bash
 
-    git clone https://github.com/dead-beef/har-extractor
+    git clone https://github.com/DaxTheDerp/har-extractor
     cd har-extractor
     pip install -e .[dev]
 
